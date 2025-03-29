@@ -1,0 +1,405 @@
+
+
+
+
+Project Title: Intelligent CPU Scheduler Simulator
+Student Details:
+Name	Roll No.	Reg. No	Signature
+Chandan Mukti	04	12315694	
+
+Varun Joshi	05	12315143	 
+Rajeev Kumar	06	12317308	
+
+
+
+Supervisor Name: Dr. Gurbinder Singh Brar(31771)
+LOVELY PROFESSIONAL UNIVERSITY
+SCHOOL OF COMPUTER SCIENCE
+Date of Submission : 31/03/2025
+
+
+
+1. Project Overview
+The "Intelligent CPU Scheduler Simulator" is a tool designed to help us understand how a computer’s CPU manages tasks (processes) using different scheduling methods: First-Come-First-Serve (FCFS), Shortest Job First (SJF), Round Robin (RR), and Priority Scheduling. Our goal is to build a simple program where users can input details about processes—like when they arrive, how long they take, and how important they are—and see how each method schedules them. The program will show a text-based Gantt chart (a timeline of when each process runs) and calculate performance metrics like average waiting time (how long processes wait before running) and turnaround time (total time from arrival to completion). 
+For this version, we’re keeping it beginner-friendly by using the console (no fancy graphics yet), but it still meets the core requirements. The expected outcome is a working simulator that’s easy to use and educational, showing how these algorithms behave with real inputs. The scope is a single-user, console-based C++ program, with potential to add a GUI later.
+
+2. Module-Wise Breakdown
+We’ve split the project into three parts to keep it organized:
+Module 1: User Interface (Console Input/Output)
+Purpose: This is where we talk to the user—asking for process details and showing results.  
+ Role: It’s the friendly face of the program, collecting inputs (like how many processes and their details) and displaying the Gantt chart and stats.
+Module 2: Scheduling Logic
+Purpose: This is the brain that figures out how to schedule processes using the four   algorithms.  
+Role: Takes the user’s input and runs FCFS, SJF, RR, or Priority to decide the order and timing of processes.
+Module 3: Data Visualization (Text-Based)
+Purpose: Shows the results in a way we can understand—like a simple timeline and numbers.  
+Role: Turns the scheduling data into a text Gantt chart and calculates waiting/turnaround times.
+3. Functionalities
+Module 1: User Interface (Console Input/Output)**  
+Feature: Ask for number of processes and their details.  
+Example: 
+1."How many processes? 2" then "P1: Arrival = 0, Burst = 5, Priority = 2".  
+Feature:  Let user pick an algorithm.  
+Example: "Pick: 1. FCFS, 2. SJF, 3. RR, 4. Priority" → User types "3" for Round Robin.  
+Feature:  Show results clearly.  
+Example: Prints "P1: Waiting = 0, Turnaround = 5" and averages.
+
+Module 2: Scheduling Logic 
+Feature:  FCFS – Runs processes in arrival order.  
+Example: P1 (arrival 0, burst 5) runs 0-5, P2 (arrival 1, burst 3) runs 5-8.  
+Feature: SJF – Picks the shortest job ready to go.  
+Example: P2 (burst 3) runs before P1 (burst 5) if both arrive at 0.  
+Feature: Round Robin – Gives each process a turn (quantum time).  
+Example: Quantum = 2, P1 runs 0-2, P2 runs 2-4, P1 runs 4-6, etc.  
+Feature: Priority – Highest priority goes first.  
+Example: P1 (priority 2) runs before P2 (priority 1).  
+Feature: Tracks timing for each process.  
+Example: Knows P1 starts at 0 and ends at 5 in FCFS.
+
+Module 3: Data Visualization (Text-Based)
+Feature: Text Gantt chart.  
+Example: "| P1 | P2 |" with "0    5    8" below it.  
+Feature: Calculate and show waiting/turnaround times.  
+Example: "P1: Waiting = 0, Turnaround = 5; Avg Waiting = 2".  
+Feature: Simple output format. 
+Example: Neatly prints each process’s stats and averages.
+
+4. Technology Used
+Programming Languages:
+ C++: Easy to learn, fast, and great for beginners to build this kind of project.
+
+Libraries and Tools:
+ iostream: For talking to the user (input/output).  
+ vector: Like a growable list to hold processes and Gantt pieces.  
+ algorithm: Helps us sort processes for SJF and Priority.
+
+Other Tools:
+ GitHub: To save and track our code changes.  
+ Code::Blocks or Visual Studio Code:  Simple editors to write and run the code.  
+ g++ Compiler: Turns our code into a program we can run (comes with most C++   setups).
+
+5. Flow Diagram
+Here’s how the program works step-by-step, based on a scenario where a user runs it with 2 processes and picks FCFS:
+ 
+6. Revision Tracking on GitHub
+Repository Name: SimpleCPUScheduler  
+GitHub Link: https://github.com/varunjoshi84/SimpleCPUScheduler
+Tracking Plan:
+ Commit 1: Basic setup—empty main() and Process struct.  
+ Commit 2:  Add user input code (asking for processes).  
+ Commit 3: Add FCFS with Gantt and results.  
+ Commit 4:  Add SJF, RR, and Priority one by one.  
+ Commit 5: Final version with all algorithms tested.
+
+
+7. Conclusion and Future Scope
+This simulator is a cool way to see how CPU scheduling works without needing fancy tools. It’s simple, runs in the console, and shows everything we need—Gantt charts and performance numbers. We learned how each algorithm handles processes differently, like FCFS being fair but slow, or SJF being quick but picky. For the future, we could:  
+Add a graphical window (using Qt or SFML) to make it prettier.  
+Let it handle processes that can be interrupted (pre-emptive versions).  
+Save results to a file for later.  
+Add more algorithms like Multi-Level Queue.
+
+8. References
+Books:
+Operating System Concepts* by Silber Schatz (for scheduling ideas).  
+ C++ Primer by Lippman (to learn C++ basics).  
+Websites:
+  C++ Reference: https://en.cppreference.com/w/  
+GeeksforGeeks Scheduling Tutorials: https://www.geeksforgeeks.org/cpu-scheduling-in-operating-systems/
+
+ Appendix
+
+A.	AI-Generated Project Elaboration/Breakdown Report
+1. Introduction
+The Intelligent CPU Scheduler Simulator is designed to provide an interactive way to understand and analyze different CPU scheduling algorithms. This project aims to help users visualize scheduling operations and performance metrics such as waiting time, turnaround time, and response time.
+2. Problem Statement
+In operating systems, CPU scheduling plays a crucial role in ensuring efficient utilization of processor time. Different scheduling algorithms impact system performance in various ways. The challenge is to build a simulator that allows users to input process details and visualize how different scheduling techniques execute these processes dynamically.
+3. Objectives
+The key objectives of this project are:
+1.	To implement four primary CPU scheduling algorithms:
+o	First-Come-First-Serve (FCFS) – Simple, non-preemptive scheduling.
+o	Shortest Job First (SJF) – Optimized for minimal waiting time.
+o	Round Robin (RR) – Fair scheduling for time-sharing systems.
+o	Priority Scheduling – Ensures high-priority processes execute first.
+2.	To simulate process execution and display scheduling results using a text-based Gantt chart.
+3.	To compute and analyze performance metrics (waiting time, turnaround time).
+4.	To provide a modular and extendable design for adding future enhancements like preemptive scheduling.
+4. System Architecture
+The system follows a modular structure:
+•	Input Module: Accepts process details (arrival time, burst time, priority).
+•	Processing Module: Implements the chosen scheduling algorithm.
+•	Output Module: Displays execution order, Gantt chart, and calculated metrics.
+5. Functional Breakdown
+Functionality	Description
+User Input	Allows users to enter process details.
+Algorithm Selection	Users can choose from FCFS, SJF, RR, or Priority.
+Scheduling Execution	Implements and executes the selected algorithm.
+Gantt Chart Generation	Displays process execution order visually.
+Performance Calculation	Computes waiting and turnaround times.
+6. Implementation Details
+•	Programming Language: C++
+•	Libraries Used: iostream, vector, algorithm
+•	Development Tools: GitHub (version control), Code::Blocks/VS Code (IDE), g++ compiler
+7. Expected Outcome
+•	A fully functional CPU scheduling simulator.
+•	Accurate scheduling execution with visual Gantt chart representation.
+•	Calculation of key scheduling performance metrics.
+•	Improved understanding of CPU scheduling techniques for students and researchers.
+
+B. Problem Statement
+"Intelligent CPU Scheduler Simulator “ 
+Description: Develop a simulator for CPU scheduling algorithms (FCFS, SJF, Round Robin, Priority Scheduling) with real-time visualizations. The simulator should allow users to input processes with arrival times, burst times, and priorities and visualize Gantt charts and performance metrics like average waiting time and turnaround time."
+
+C. Solution/Code
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+// Structure to hold process details
+struct Process {
+    int pid, arrival, burst, priority, remaining;
+};
+
+// Structure for Gantt chart pieces (timeline segments)
+struct GanttPiece {
+    int pid, start, end;
+};
+
+// Function to display the Gantt chart (visual timeline)
+void showGantt(vector<GanttPiece> gantt) {
+    cout << "\nHere's the Gantt Chart (like a timeline):\n";
+    cout << "|";
+    for (int i = 0; i < gantt.size(); i++) {
+        cout << " P" << gantt[i].pid << " |";
+    }
+    cout << "\n0";
+    for (int i = 0; i < gantt.size(); i++) {
+        cout << "    " << gantt[i].end;
+    }
+    cout << "\n";
+}
+
+// Function to calculate and show waiting and turnaround times
+void calculateResults(vector<Process> processes, vector<GanttPiece> gantt) {
+    float totalWaiting = 0, totalTurnaround = 0;
+    int n = processes.size();
+    for (int i = 0; i < n; i++) {
+        int finishTime = 0;
+        for (int j = 0; j < gantt.size(); j++) {
+            if (gantt[j].pid == processes[i].pid && gantt[j].end > finishTime) {
+                finishTime = gantt[j].end;
+            }
+        }
+        int turnaround = finishTime - processes[i].arrival;
+        int waiting = turnaround - processes[i].burst;
+        cout << "P" << processes[i].pid << ": Waiting Time = " << waiting 
+             << ", Turnaround Time = " << turnaround << "\n";
+        totalWaiting += waiting;
+        totalTurnaround += turnaround;
+    }
+    cout << "Average Waiting Time = " << totalWaiting / n << "\n";
+    cout << "Average Turnaround Time = " << totalTurnaround / n << "\n";
+}
+
+// FCFS = First Come First Serve
+void doFCFS(vector<Process> processes) {
+    vector<GanttPiece> gantt;
+    int currentTime = 0;
+    cout << "\nRunning FCFS...\n";
+    for (int i = 0; i < processes.size(); i++) {
+        if (currentTime < processes[i].arrival) {
+            currentTime = processes[i].arrival;
+        }
+        GanttPiece piece;
+        piece.pid = processes[i].pid;
+        piece.start = currentTime;
+        piece.end = currentTime + processes[i].burst;
+        gantt.push_back(piece);
+        currentTime += processes[i].burst;
+    }
+    showGantt(gantt);
+    calculateResults(processes, gantt);
+}
+
+// SJF = Shortest Job First
+void doSJF(vector<Process> processes) {
+    vector<GanttPiece> gantt;
+    int currentTime = 0;
+    int done = 0;
+    vector<bool> finished(processes.size(), false);
+    cout << "\nRunning SJF...\n";
+    while (done < processes.size()) {
+        int shortest = -1;
+        int minBurst = 9999;
+        for (int i = 0; i < processes.size(); i++) {
+            if (!finished[i] && processes[i].arrival <= currentTime && processes[i].burst < minBurst) {
+                shortest = i;
+                minBurst = processes[i].burst;
+            }
+        }
+        if (shortest == -1) {
+            currentTime++;
+        } else {
+            GanttPiece piece;
+            piece.pid = processes[shortest].pid;
+            piece.start = currentTime;
+            piece.end = currentTime + processes[shortest].burst;
+            gantt.push_back(piece);
+            currentTime += processes[shortest].burst;
+            finished[shortest] = true;
+            done++;
+        }
+    }
+    showGantt(gantt);
+    calculateResults(processes, gantt);
+}
+
+// Round Robin
+void doRoundRobin(vector<Process> processes, int quantum) {
+    vector<GanttPiece> gantt;
+    int currentTime = 0;
+    int done = 0;
+    vector<Process> proc = processes;
+    cout << "\nRunning Round Robin with quantum " << quantum << "...\n";
+    while (done < processes.size()) {
+        bool didSomething = false;
+        for (int i = 0; i < proc.size(); i++) {
+            if (proc[i].remaining > 0 && proc[i].arrival <= currentTime) {
+                didSomething = true;
+                int runTime = min(quantum, proc[i].remaining);
+                GanttPiece piece;
+                piece.pid = proc[i].pid;
+                piece.start = currentTime;
+                piece.end = currentTime + runTime;
+                gantt.push_back(piece);
+                currentTime += runTime;
+                proc[i].remaining -= runTime;
+                if (proc[i].remaining == 0) {
+                    done++;
+                }
+            }
+        }
+        if (!didSomething) {
+            currentTime++;
+        }
+    }
+    showGantt(gantt);
+    calculateResults(processes, gantt);
+}
+
+// Priority Scheduling
+void doPriority(vector<Process> processes) {
+    vector<GanttPiece> gantt;
+    int currentTime = 0;
+    int done = 0;
+    vector<bool> finished(processes.size(), false);
+    cout << "\nRunning Priority Scheduling...\n";
+    while (done < processes.size()) {
+        int best = -1;
+        int maxPriority = -1;
+        for (int i = 0; i < processes.size(); i++) {
+            if (!finished[i] && processes[i].arrival <= currentTime && processes[i].priority > maxPriority) {
+                best = i;
+                maxPriority = processes[i].priority;
+            }
+        }
+        if (best == -1) {
+            currentTime++;
+        } else {
+            GanttPiece piece;
+            piece.pid = processes[best].pid;
+            piece.start = currentTime;
+            piece.end = currentTime + processes[best].burst;
+            gantt.push_back(piece);
+            currentTime += processes[best].burst;
+            finished[best] = true;
+            done++;
+        }
+    }
+    showGantt(gantt);
+    calculateResults(processes, gantt);
+}
+
+int main() {
+    cout << "Welcome to the CPU Scheduler Simulator!\n";
+    int numProcesses;
+    cout << "How many processes do you want? ";
+    cin >> numProcesses;
+
+    if (cin.fail() || numProcesses <= 0) {
+        cout << "Invalid number of processes! Please enter a positive integer.\n";
+        return 1;
+    }
+
+    vector<Process> processes;
+    for (int i = 0; i < numProcesses; i++) {
+        int arrival, burst, priority;
+        cout << "For Process P" << (i + 1) << ":\n";
+        
+        cout << "Enter arrival time: ";
+        cin >> arrival;
+        if (cin.fail() || arrival < 0) {
+            cout << "Invalid arrival time! Must be non-negative.\n";
+            return 1;
+        }
+
+        cout << "Enter burst time: ";
+        cin >> burst;
+        if (cin.fail() || burst <= 0) {
+            cout << "Invalid burst time! Must be positive.\n";
+            return 1;
+        }
+
+        cout << "Enter priority (higher number = more important): ";
+        cin >> priority;
+        if (cin.fail()) {
+            cout << "Invalid priority! Must be an integer.\n";
+            return 1;
+        }
+
+        Process p;
+        p.pid = i + 1;
+        p.arrival = arrival;
+        p.burst = burst;
+        p.priority = priority;
+        p.remaining = burst;
+        processes.push_back(p);
+    }
+
+    int choice;
+    cout << "\nPick a scheduling algorithm:\n";
+    cout << "1. FCFS\n2. SJF\n3. Round Robin\n4. Priority\nYour choice: ";
+    cin >> choice;
+
+    if (cin.fail()) {
+        cout << "Invalid choice! Please enter a number.\n";
+        return 1;
+    }
+
+    if (choice == 1) {
+        doFCFS(processes);
+    } else if (choice == 2) {
+        doSJF(processes);
+    } else if (choice == 3) {
+        int quantum;
+        cout << "Enter time quantum for Round Robin: ";
+        cin >> quantum;
+        if (cin.fail() || quantum <= 0) {
+            cout << "Invalid quantum! Must be positive.\n";
+            return 1;
+        }
+        doRoundRobin(processes, quantum);
+    } else if (choice == 4) {
+        doPriority(processes);
+    } else {
+        cout << "Oops! That's not a valid choice.\n";
+    }
+
+    cout << "\nAll done! Hope that helped you see how scheduling works!\n";
+    return 0;
+}
+
+OUTPUT
+
