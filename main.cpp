@@ -245,4 +245,8 @@ int main() {
 
     cout << "\nAll done! Hope that helped you see how scheduling works!\n";
     return 0;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 18baad5ce1ba2acba3a306bfeb30d2a9feec5b8f
