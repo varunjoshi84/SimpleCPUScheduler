@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Scheduler Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gantt-bar {
+            height: 40px;
+            margin: 8px 0;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            display: inline-block;
+            transition: width 0.5s ease-in-out;
+            position: relative;
+        }
+        .gantt-bar:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .input-error { border-color: #ef4444; }
+        .hidden { display: none; }
+        .fade-in { animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen flex items-center justify-center">
+    <div class="container mx-auto p-6 max-w-4xl">
+        <h1 class="text-4xl font-bold text-center text-blue-600 mb-8 animate-bounce">CPU Scheduler Simulator</h1>
+
+        <!-- Form Section -->
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold mb-6 text-gray-800">Enter Process Details</h2>
+            <div class="mb-6">
+                <label class="block text-gray-700 font-medium">Number of Processes:</label>
+                <input type="number" id="numProcesses" min="1" max="10" class="w-full p-3 border rounded mt-2 focus:ring-2 focus:ring-blue-500" placeholder="e.g., 4">
+            </div>
+            <div id="processInputs" class="space-y-6"></div>
+            <div class="mb-6">
+                <label class="block text-gray-700 font-medium">Scheduling Algorithm:</label>
+                <select id="algorithm" class="w-full p-3 border rounded mt-2 focus:ring-2 focus:ring-blue-500">
+                    <option value="1">FCFS</option>
+                    <option value="2">SJF</option>
+                    <option value="3">Round Robin</option>
+                    <option value="4">Priority</option>
+                </select>
+            </div>
+            <div id="quantumDiv" class="mb-6 hidden">
+                <label class="block text-gray-700 font-medium">Time Quantum (for Round Robin):</label>
+                <input type="number" id="quantum" min="1" class="w-full p-3 border rounded mt-2 focus:ring-2 focus:ring-blue-500" placeholder="e.g., 2">
+            </div>
+            <div class="flex space-x-4">
+                <button id="submitBtn" class="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition-colors flex-1">Run Simulation</button>
+                <button id="resetBtn" class="bg-gray-500 text-white p-3 rounded-lg hover:bg-gray-600 transition-colors flex-1">Reset</button>
+            </div>
+            <p id="loading" class="text-gray-500 mt-4 hidden">Running simulation...</p>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="mt-8 bg-white p-6 rounded-lg shadow-lg hidden fade-in">
+            <h2 class="text-2xl font-semibold mb-6 text-gray-800">Simulation Results</h2>
+            <div class="flex justify-center space-x-4 mb-6">
+                <button id="showGantt" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Show Gantt Chart</button>
+                <button id="showMetrics" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Show Metrics</button>
+            </div>
+            <div id="ganttChart" class="mb-6"></div>
+            <div id="metrics" class="text-gray-700 hidden"></div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
