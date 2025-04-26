@@ -82,7 +82,7 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
 
 // Run simulation by sending input to Flask server
 async function runSimulation(inputData) {
-    const response = await fetch('http://127.0.0.1:5001/run', {
+    const response = await fetch('/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ input: inputData })
